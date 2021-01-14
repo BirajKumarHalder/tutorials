@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-2">
+        <app-course-topics [selectedTopic]='selectedTopic' [courseTopics]='courseTopics' [courseLogo]='courseLogo'
+            (selectedTopicEvent)='recieveSelectedTopic($event)'>
+        </app-course-topics>
+    </div>
+    <div class="col-md-10">
+        <app-course-title [courseName]='courseName'></app-course-title>
+        <app-course-topics-details [courseName]='courseName' [selectedTopic]='selectedTopic'>
+        </app-course-topics-details>
+        <app-course-topics-navigation [previousTopic]='previousTopic' [nextTopic]='nextTopic'
+            (selectedTopicEvent)='recieveSelectedTopic($event)'>
+        </app-course-topics-navigation>
+    </div>
+</div>
