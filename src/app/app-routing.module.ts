@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AllCoursesComponent } from './all-courses/all-courses.component';
-import { CourseComponent } from './course/course.component';
+import { AllCoursesComponent } from './view-course/all-courses/all-courses.component';
+import { CourseComponent } from './view-course/course/course.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'course/Angular',
+    redirectTo: 'course/view',
     pathMatch: 'full'
   }, {
-    path: 'course',
+    path: 'course/view',
     component: AllCoursesComponent
   }, {
-    path: 'course/:course',
+    path: 'course/view/:course',
     component: CourseComponent
   }
 ];

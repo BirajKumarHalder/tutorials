@@ -1,8 +1,0 @@
-<div class="rounded-0">
-    <img src="{{courseLogo}}" class="img-fluid mx-auto d-block border-left-0 border-right-0 rounded-0" alt="logo">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor='let topic of courseTopics'
-            [ngClass]="{'active':topic.id===selectedTopic.id}" (click)='selectTopic(topic);'>
-            {{topic.name}}</li>
-    </ul>
-</div>

@@ -1,0 +1,32 @@
+.topic-box {
+    flex-shrink: 0;
+}
+
+.nav-button {
+    display: none;
+}
+
+.img-logo {
+    max-width: 5em; 
+    max-height: 5em;
+}
+
+.course-title {
+    display: inline;
+}
+
+@media screen and (max-width: 992px) {
+    .nav-button {
+        display: inline;
+    }    
+    .topic-box {
+        flex: 1 0 0%
+    }
+    .img-logo {
+        max-width: 40px; 
+        max-height: 40px;
+    }
+    .course-title {
+        display: none;
+    }    
+}

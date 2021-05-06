@@ -1,0 +1,28 @@
+.icon-box {
+    height: 100%;
+    width: 6em;
+}
+
+.course-box {
+    height: 100%;
+    width: calc(100% - 10em);
+}
+
+.action-box {
+    height: 100%;
+    width: 4em;
+}
+
+.view-box{
+    height: 100%;
+    width: 3em;
+    margin-left: 1em;
+}
+
+.course-card img{
+    height: 4em;
+    width: 4em;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

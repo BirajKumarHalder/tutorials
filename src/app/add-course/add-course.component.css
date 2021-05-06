@@ -1,0 +1,9 @@
+.icon-box {
+    height: 100%;
+    width: 4em;
+}
+
+.course-box {
+    height: 100%;
+    width: calc(100% - 9em);
+}

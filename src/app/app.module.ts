@@ -1,32 +1,47 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopnavComponent } from './topnav/topnav.component';
-import { CourseTitleComponent } from './course-title/course-title.component';
-import { CourseTopicsComponent } from './course-topics/course-topics.component';
-import { CourseTopicsDetailsComponent } from './course-topics-details/course-topics-details.component';
-import { CourseComponent } from './course/course.component';
-import { CourseTopicsNavigationComponent } from './course-topics-navigation/course-topics-navigation.component';
-import { AllCoursesComponent } from './all-courses/all-courses.component';
+import { CourseTopicDetailsComponent } from './view-course/course-topics-details/course-topics-details.component';
+import { CourseTopicsNavigationComponent } from './view-course/course-topics-navigation/course-topics-navigation.component';
+import { CourseTopicsComponent } from './view-course/course-topics/course-topics.component';
+import { CourseComponent } from './view-course/course/course.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AllCoursesComponent } from './view-course/all-courses/all-courses.component';
+import { AddCourseComponent } from './add-course/add-course.component';
+import { ToastedMessageComponent } from './common/toasted-message/toasted-message.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { HeaderComponent } from './header/header.component';
+import { AddTopicComponent } from './add-topic/add-topic.component';
+import { EditTopicComponent } from './edit-topic/edit-topic.component';
+import { PopupComponent } from './common/popup/popup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopnavComponent,
-    CourseTitleComponent,
     CourseTopicsComponent,
-    CourseTopicsDetailsComponent,
+    CourseTopicDetailsComponent,
     CourseComponent,
     CourseTopicsNavigationComponent,
-    AllCoursesComponent
+    AllCoursesComponent,
+    AddCourseComponent,
+    ToastedMessageComponent,
+    HeaderComponent,
+    AddTopicComponent,
+    EditTopicComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    EditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

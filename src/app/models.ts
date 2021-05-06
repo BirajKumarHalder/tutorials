@@ -1,12 +1,19 @@
-export interface CourseDetails {
-    courseId: string;
+export class CourseDetails {
+    courseId: number;
     courseName: string;
-    courseTitle: string;
-    courseLogo: string;
-    topics?: (TopicsEntity)[] | null
+    courseLogo: any;
+    topicCount: number;
+    topics: TopicDetails[] = [];
 }
-export interface TopicsEntity {
-    id: number;
+
+export class TopicDetails {
+    topicId: number;
     name: string;
-    file: string;
+    courseId: number;
+    order: number;
+    content: string;
+}
+export class Message {
+    message: string;
+    type: string;
 }

@@ -1,0 +1,22 @@
+.bg-blue {
+    background-color: #11172b!important;
+}
+
+.nav-link {
+    color: #f3f3f5 !important;
+}
+
+.nav-link:hover {
+    background: #a5b0d680;
+    color: #11172b !important;
+}
+
+.nav-item {
+    border-bottom: 2px solid #f02f48;
+    cursor: pointer;
+}
+
+.active{
+    background: #a5b0d680;
+    border-bottom: 2px solid #f3f3f5;
+}

@@ -1,0 +1,22 @@
+<div *ngIf="topicDetailsReady" class="card rounded-0 border-0">
+    <div class="card-body">
+        <form [formGroup]="topicForm">
+            <div class="my-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control rounded-0" id="name" placeholder="Topic Name"
+                        formControlName="name">
+                    <label for="topicName">Topic Name</label>
+                </div>
+            </div>
+            <div class="my-3">
+                <editor [init]='editorConfig' formControlName="content"></editor>
+            </div>
+            <div class="my-3">
+                <button class="btn btn-secondary float-end rounded-0 mx-1" type="button"
+                    (click)="cancelEdit()">Cancel</button>
+                <button class="btn btn-secondary float-end rounded-0 mx-1" type="button" [disabled]="topicForm.invalid"
+                    (click)="submitTopic()">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
