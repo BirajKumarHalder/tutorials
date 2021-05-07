@@ -11,13 +11,14 @@ import { TopicDetails } from '../../models';
 export class CourseTopicsComponent {
 
   @Input() courseTopics: TopicDetails[];
-  @Input() selectedTopic: TopicDetails;
-  @Output() selectedTopicEvent = new EventEmitter<TopicDetails>();
+  @Input() selectedTopicId: number;
+  @Output() selectedTopicEvent = new EventEmitter<number>();
+  @Output() deleteEvent = new EventEmitter<number>();
 
   constructor(private appSvc: AppService, private popupSvc: PopupService) { }
 
   selectTopic(topic: TopicDetails) {
-    this.selectedTopicEvent.emit(topic);
+    this.selectedTopicEvent.emit(topic.topicId);
   }
 
   deleteTopic(topic: TopicDetails) {

@@ -10,8 +10,8 @@ import { TopicDetails } from '../../models';
 })
 export class CourseTopicDetailsComponent implements OnChanges {
 
-  @Input() selectedTopic: TopicDetails;
-  @Output() editTopic = new EventEmitter<TopicDetails>();
+  @Input() selectedTopicId: number;
+  @Output() editTopic = new EventEmitter<number>();
   topicDetails: TopicDetails;
   topicDetailsReady = false;
 
@@ -19,8 +19,8 @@ export class CourseTopicDetailsComponent implements OnChanges {
 
   ngOnChanges() {
     this.topicDetailsReady = false;
-    if (this.selectedTopic !== null && this.selectedTopic !== undefined) {
-      this.appSvc.getTopicById(this.selectedTopic.topicId).subscribe(res => {
+    if (this.selectedTopicId) {
+      this.appSvc.getTopicById(this.selectedTopicId).subscribe(res => {
         this.topicDetails = res;
         this.topicDetailsReady = true;
       });
@@ -28,7 +28,7 @@ export class CourseTopicDetailsComponent implements OnChanges {
   }
 
   editCourse() {
-    this.editTopic.emit(this.selectedTopic);
+    this.editTopic.emit(this.selectedTopicId);
   }
 
 }

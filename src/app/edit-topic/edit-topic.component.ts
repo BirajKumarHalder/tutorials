@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../app.service';
 import { TopicDetails } from '../models';
@@ -10,7 +10,9 @@ import { TopicDetails } from '../models';
 })
 export class EditTopicComponent {
 
-  @Input() selectedTopic: TopicDetails;
+  @Input() selectedTopicId: number;
+  @Output() editEvent = new EventEmitter<number>();
+  selectedTopic: TopicDetails;
   topicForm: FormGroup;
   html = '';
   topicDetailsReady = false;
@@ -37,8 +39,9 @@ export class EditTopicComponent {
 
   ngOnChanges() {
     this.topicDetailsReady = false;
-    if (this.selectedTopic !== null && this.selectedTopic !== undefined) {
-      this.appSvc.getTopicById(this.selectedTopic.topicId).subscribe(res => {
+    if (this.selectedTopicId) {
+      this.appSvc.getTopicById(this.selectedTopicId).subscribe(res => {
+        this.selectedTopic = res;
         this.topicForm.patchValue(res);
         this.topicDetailsReady = true;
       });
@@ -60,14 +63,15 @@ export class EditTopicComponent {
     topic.topicName = this.topicForm.controls.name.value;
     topic.topicContent = this.topicForm.controls.content.value;
     this.appSvc.updateTopic(topic).subscribe(savedTopic => {
-      this.appSvc.setCurrentTopic(savedTopic.topicId);
+      this.editEvent.emit(savedTopic.topicId);
     }, error => {
       console.error(error);
+      this.editEvent.emit(this.selectedTopicId);
     });
   }
 
   cancelEdit() {
-    this.appSvc.setCurrentTopic(this.selectedTopic.topicId);
+    this.editEvent.emit(this.selectedTopicId);
   }
 
 }

@@ -17,7 +17,7 @@ export class CourseComponent {
   courseName: string;
   courseLogo: SafeUrl;
   courseTopics: TopicDetails[];
-  selectedTopic: TopicDetails;
+  selectedTopicId: number;
   previousTopic: TopicDetails;
   nextTopic: TopicDetails;
   editTopic = false;
@@ -30,44 +30,36 @@ export class CourseComponent {
   }
 
   constructor(private route: ActivatedRoute, private appSvc: AppService) {
-    this.courseViewReady = false;
-    this.courseId = this.route.snapshot.params['course'];
-    this.appSvc.getCurrentTopic().subscribe(topicId => {
-      this.editTopic = false;
-      this.appSvc.getCourseById(this.courseId).subscribe((courseRes: CourseDetails) => {
-        this.courseName = courseRes.courseName;
-        this.courseTopics = courseRes.topics;
-        this.courseLogo = courseRes.courseLogo;
-        this.selectedTopic = courseRes.topics.find(t => t.topicId === topicId);
-        this.recieveSelectedTopicEvent(this.selectedTopic);
-        this.courseViewReady = true;
-      })
-    }, err => {
-      console.log(err);
-    });
+    this.courseId = this.route.snapshot.params['courseId'];
+    this.selectedTopicId = this.route.snapshot.data.topicId;
+    this.retrieveCourseDetails(this.courseId);
   }
 
-  recieveSelectedTopicEvent(topic: TopicDetails) {
-    this.navClicked = false;
-    this.selectedTopic = topic;
-    this.courseTopics.forEach((t, index) => {
-      if (t.topicId === this.selectedTopic.topicId) {
-        if (index - 1 > -1) {
-          this.previousTopic = this.courseTopics[index - 1];
-        } else {
-          this.previousTopic = null;
-        }
-        if (index + 1 < this.courseTopics.length) {
-          this.nextTopic = this.courseTopics[index + 1];
-        } else {
-          this.nextTopic = null;
-        }
-      }
+  retrieveCourseDetails(courseId: number) {
+    this.courseViewReady = false;
+    this.editTopic = false;
+    this.appSvc.getCourseById(courseId).subscribe((courseRes: CourseDetails) => {
+      this.courseName = courseRes.courseName;
+      this.courseTopics = courseRes.topics;
+      this.courseLogo = courseRes.courseLogo;
+      this.recieveSelectedTopicEvent(this.selectedTopicId);
+      this.courseViewReady = true;
     })
   }
 
-  editTopicEventHandler(topic: TopicDetails) {
+  recieveSelectedTopicEvent(topicId: number) {
+    this.navClicked = false;
+    this.selectedTopicId = topicId;
+  }
+
+  editTopicEventHandler(topicId: number) {
     this.editTopic = true;
+  }
+
+  addEditDeleteTopicEventHandler(topicId: number) {
+    this.editTopic = false;
+    this.selectedTopicId = topicId;
+    this.retrieveCourseDetails(this.courseId);
   }
 
   navAction() {

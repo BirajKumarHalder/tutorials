@@ -11,12 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class AppService {
 
   private localApiUrl = environment.localApiUrl;
-  private currentTopic = new BehaviorSubject<number>(2);
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
-
-  setCurrentTopic = (topicId: number) => this.currentTopic.next(topicId);
-  getCurrentTopic = () => this.currentTopic.asObservable();
 
   getAllCourses(): Observable<CourseDetails[]> {
     return new Observable(subscriber => {

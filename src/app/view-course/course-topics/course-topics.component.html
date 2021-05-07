@@ -1,10 +1,7 @@
 <div class="rounded-0">
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <app-add-topic></app-add-topic>
-        </li>
         <li class="list-group-item" *ngFor='let topic of courseTopics'
-            [ngClass]="{'active':topic.topicId===selectedTopic.topicId}" (click)='selectTopic(topic);'>
+            [ngClass]="{'active':topic.topicId===selectedTopicId}" (click)='selectTopic(topic);'>
             <span>{{topic.name}}</span>
             <span class="float-end" (click)="deleteTopic(topic)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"

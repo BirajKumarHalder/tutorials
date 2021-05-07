@@ -20,19 +20,27 @@
                     </button>
                 </div>
             </div>
-            <app-course-topics *ngIf='windowSize>=992||navClicked' [selectedTopic]='selectedTopic'
-                [courseTopics]='courseTopics' (selectedTopicEvent)='recieveSelectedTopicEvent($event)'>
+            <div *ngIf='windowSize>=992||navClicked' class='card rounded-0'>
+                <div class="card-body py-2">
+                    <app-add-topic (addEvent)="addEditDeleteTopicEventHandler($event)"></app-add-topic>
+                </div>
+            </div>
+            <app-course-topics *ngIf='windowSize>=992||navClicked' [selectedTopicId]='selectedTopicId'
+                [courseTopics]='courseTopics' (selectedTopicEvent)='recieveSelectedTopicEvent($event)'
+                (deleteEvent)="addEditDeleteTopicEventHandler($event)">
             </app-course-topics>
         </div>
         <div class="col-md-12 col-lg-9">
             <div *ngIf="!editTopic">
-                <app-course-topics-details [selectedTopic]='selectedTopic' (editTopic)="editTopicEventHandler($event)">
+                <app-course-topics-details [selectedTopicId]='selectedTopicId'
+                    (editTopic)="editTopicEventHandler($event)">
                 </app-course-topics-details>
             </div>
             <div *ngIf="editTopic">
-                <app-edit-topic [selectedTopic]='selectedTopic'></app-edit-topic>
+                <app-edit-topic [selectedTopicId]='selectedTopicId'
+                    (editEvent)="addEditDeleteTopicEventHandler($event)"></app-edit-topic>
             </div>
-            <app-course-topics-navigation [previousTopic]='previousTopic' [nextTopic]='nextTopic'
+            <app-course-topics-navigation [selectedTopicId]='selectedTopicId' [courseTopics]='courseTopics'
                 (selectedTopicEvent)='recieveSelectedTopicEvent($event)'>
             </app-course-topics-navigation>
         </div>
