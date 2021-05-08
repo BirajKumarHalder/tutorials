@@ -9,8 +9,8 @@ export const AllCoursesAnimations = [
                     [
                         animate('500ms',
                             keyframes([
-                                style({ opacity: 0, transform: 'translateX(-1.5em)', offset: 0 }),
-                                style({ opacity: 0.5, transform: 'translateX(0.5em)', offset: 0.8 }),
+                                style({ opacity: 0, transform: 'translateX(-1em)', offset: 0 }),
+                                style({ opacity: 0.5, transform: 'translateX(-0.5em)', offset: 0.8 }),
                                 style({ opacity: 1, transform: 'translateX(0em)', offset: 1.0 })
                             ])
                         )

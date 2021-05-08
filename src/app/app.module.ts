@@ -17,7 +17,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { HeaderComponent } from './header/header.component';
 import { AddTopicComponent } from './add-topic/add-topic.component';
 import { EditTopicComponent } from './edit-topic/edit-topic.component';
-import { PopupComponent } from './common/popup/popup.component';
+import { PopupModule } from './common/popup/popup.module';
 
 @NgModule({
   declarations: [
@@ -31,8 +31,7 @@ import { PopupComponent } from './common/popup/popup.component';
     ToastedMessageComponent,
     HeaderComponent,
     AddTopicComponent,
-    EditTopicComponent,
-    PopupComponent
+    EditTopicComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +40,8 @@ import { PopupComponent } from './common/popup/popup.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    EditorModule
+    EditorModule,
+    PopupModule
   ],
   providers: [],
   bootstrap: [AppComponent]

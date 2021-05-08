@@ -1,11 +1,11 @@
 .icon-box {
     height: 100%;
-    width: 6em;
+    width: 4em;
 }
 
 .course-box {
     height: 100%;
-    width: calc(100% - 10em);
+    width: calc(100% - 8em);
 }
 
 .action-box {

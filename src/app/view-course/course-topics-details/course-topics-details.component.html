@@ -1,6 +1,6 @@
-<div *ngIf="topicDetailsReady" class="card rounded-0 border-0">
-    <div class="card-body">
-        <div class="row g-0">
+<div class="card rounded-0 border-0" [@fadeFromLeft]="topicDetails">
+    <div *ngIf="topicDetails" class="card-body">
+        <div *ngIf="topicDetails?.name" class="row g-0">
             <div class="col">
                 <span class="fs-3">{{topicDetails.name}}</span>
                 <span class="float-end" (click)="editCourse()">

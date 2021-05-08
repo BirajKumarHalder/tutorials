@@ -81,6 +81,18 @@ export class AppService {
     })
   }
 
+  getNoTopicContent(): Observable<TopicDetails> {
+    return new Observable(subscriber => {
+      this.http.get('./assets/notopiccontent.txt', { responseType: 'text' }).subscribe((res: any) => {
+        let topic = new TopicDetails();
+        topic.content = res;
+        subscriber.next(topic);
+      }, error => {
+        subscriber.next(error);
+      })
+    })
+  }
+
   updateTopic(topic: TopicDetails): Observable<TopicDetails> {
     return new Observable(subscriber => {
       this.http.put(environment.localApiUrl + 'course/' + topic.courseId + '/topic/' + topic.topicId, topic).subscribe((res: any) => {

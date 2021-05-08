@@ -12,7 +12,6 @@ import { CourseDetails, TopicDetails } from '../../models';
 })
 export class CourseComponent {
 
-  courseViewReady = false;
   courseId: number;
   courseName: string;
   courseLogo: SafeUrl;
@@ -36,14 +35,11 @@ export class CourseComponent {
   }
 
   retrieveCourseDetails(courseId: number) {
-    this.courseViewReady = false;
     this.editTopic = false;
     this.appSvc.getCourseById(courseId).subscribe((courseRes: CourseDetails) => {
       this.courseName = courseRes.courseName;
       this.courseTopics = courseRes.topics;
       this.courseLogo = courseRes.courseLogo;
-      this.recieveSelectedTopicEvent(this.selectedTopicId);
-      this.courseViewReady = true;
     })
   }
 
@@ -60,6 +56,7 @@ export class CourseComponent {
     this.editTopic = false;
     this.selectedTopicId = topicId;
     this.retrieveCourseDetails(this.courseId);
+    this.recieveSelectedTopicEvent(topicId)
   }
 
   navAction() {

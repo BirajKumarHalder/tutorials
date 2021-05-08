@@ -6,31 +6,30 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 })
 export class PopupService {
 
-  private subject = new Subject<any>();
+  private popupConfig = new Subject<any>();
 
   confirmThis(message: string, yesFn: () => void, noFn: () => void): any {
-    console.log(message);
-    this.setConfirmation(message, yesFn, noFn);
+    this.setPopupConfig(message, yesFn, noFn);
   }
 
-  setConfirmation(message: string, yesFn: () => void, noFn: () => void): any {
+  setPopupConfig(message: string, yesFn: () => void, noFn: () => void): any {
     const that = this;
-    this.subject.next({
+    this.popupConfig.next({
       type: 'confirm',
       text: message,
-      yesFn(): any {
-        that.subject.next();
+      accept(): any {
         yesFn();
+        that.popupConfig.next();
       },
-      noFn(): any {
-        that.subject.next();
+      cancel(): any {
         noFn();
+        that.popupConfig.next();
       }
     });
   }
 
-  getMessage(): Observable<any> {
-    return this.subject.asObservable();
+  getPopupConfig(): Observable<any> {
+    return this.popupConfig.asObservable();
   }
 
 }

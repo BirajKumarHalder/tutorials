@@ -14,7 +14,10 @@ export class AppResolverService implements Resolve<any>{
     const courseId = route.params['courseId'];
     return new Observable(subscriber => {
       this.appSvc.getCourseById(courseId).subscribe(res => {
-        const selectedTopicId = res.topics[0].topicId;
+        let selectedTopicId = -1;
+        if (res.topics?.length > 0) {
+          selectedTopicId = res.topics[0].topicId;
+        }
         subscriber.next(selectedTopicId);
         subscriber.complete();
       })

@@ -1,23 +1,27 @@
 <div class="container-fluid">
-    <div *ngIf="courseViewReady" class='row g-0'>
-        <div class="col-md-12 col-lg-3">
+    <div class='row g-0'>
+        <div class="col-md-12 col-lg-2">
             <div class="row g-0">
-                <div class="col py-3">
-                    <img [src]="courseLogo" class="img-fluid mx-3 align-middle img-logo" alt="logo">
-                    <span class="fs-1 align-middle course-title">{{courseName}}</span>
-                    <button type="button" class="nav-button btn btn-outline-secondary mx-3 float-end"
-                        (click)='navAction();'>
-                        <svg *ngIf='!navClicked' xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="currentColor" class="bi bi-arrows-expand" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10z" />
-                        </svg>
-                        <svg *ngIf='navClicked' xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707l-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z" />
-                        </svg>
-                    </button>
+                <div class="col">
+                    <div class="card border-0 rounded-0">
+                        <div class="card-body px-1">
+                            <img [src]="courseLogo" class="img-fluid mx-1 align-middle img-logo" alt="logo">
+                            <span class="fs-1 align-middle course-title text-truncate">{{courseName}}</span>
+                            <button type="button" class="nav-button btn btn-outline-secondary mx-3 float-end"
+                                (click)='navAction();'>
+                                <svg *ngIf='!navClicked' xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="currentColor" class="bi bi-arrows-expand" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10z" />
+                                </svg>
+                                <svg *ngIf='navClicked' xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707l-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div *ngIf='windowSize>=992||navClicked' class='card rounded-0'>
@@ -30,7 +34,7 @@
                 (deleteEvent)="addEditDeleteTopicEventHandler($event)">
             </app-course-topics>
         </div>
-        <div class="col-md-12 col-lg-9">
+        <div class="col-md-12 col-lg-10">
             <div *ngIf="!editTopic">
                 <app-course-topics-details [selectedTopicId]='selectedTopicId'
                     (editTopic)="editTopicEventHandler($event)">

@@ -1,22 +1,18 @@
-<div *ngIf="message" class="modal" tabindex="-1" role="dialog" style="display:block!important">
-    <div class="modal-dialog custom-alert" role="document">
-        <div class="modal-content">
-            <div *ngIf="message?.type == 'confirm'" class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="text-center confirm-message">{{message.text}}</p>
+<div *ngIf="popupConfig" class="modal" style="display:block!important">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-0">
+            <div *ngIf="popupConfig?.type == 'confirm'" class="modal-body">
+                <div class="row g-0">
+                    <div class="col">
+                        <p class="text-center confirm-message">{{popupConfig.text}}</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="confirm-button">
-                            <a class="mr-2" (click)="message.yesFn()">
-                                <button class="btn btn-yes">Yes</button>
-                            </a>
-                            <a (click)="message.noFn()">
-                                <button class="btn btn-no">No</button>
-                            </a>
-                        </p>
+                <div class="row g-0">
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-secondary btn-sm float-end rounded-0 mx-1"
+                            (click)="popupConfig.cancel()">Cancel</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm float-end rounded-0 mx-1"
+                            (click)="popupConfig.accept()">Yes</button>
                     </div>
                 </div>
             </div>
