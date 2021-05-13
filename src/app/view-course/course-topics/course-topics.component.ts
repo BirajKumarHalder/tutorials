@@ -20,7 +20,6 @@ export class CourseTopicsComponent {
   constructor(private appSvc: AppService, private popupSvc: PopupService) { }
 
   selectTopic(topic: TopicDetails) {
-    console.log('topic emit')
     this.selectedTopicEvent.emit(topic.topicId);
   }
 
