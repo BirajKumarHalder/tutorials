@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AppService } from '../app.service';
-import { TopicDetails } from '../models';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppService } from 'src/app/app.service';
+import { TopicDetails } from 'src/app/models';
 
 @Component({
   selector: 'app-edit-topic',
@@ -10,12 +11,10 @@ import { TopicDetails } from '../models';
 })
 export class EditTopicComponent {
 
-  @Input() selectedTopicId: number;
-  @Output() editEvent = new EventEmitter<number>();
-  selectedTopic: TopicDetails;
+  topicDetailsReady: boolean;
+  selectedTopicId: number;
+  topicDetails: TopicDetails;
   topicForm: FormGroup;
-  html = '';
-  topicDetailsReady = false;
 
   editorConfig = {
     height: 500,
@@ -33,45 +32,43 @@ export class EditTopicComponent {
       bullist numlist outdent indent | removeformat | help'
   }
 
-  constructor(private appSvc: AppService) {
-    this.createTopicForm();
-  }
-
-  ngOnChanges() {
-    this.topicDetailsReady = false;
-    if (this.selectedTopicId) {
-      this.appSvc.getTopicById(this.selectedTopicId).subscribe(res => {
-        this.selectedTopic = res;
-        this.topicForm.patchValue(res);
-        this.topicDetailsReady = true;
-      });
-    }
+  constructor(private router: Router, private route: ActivatedRoute, private appSvc: AppService) {
+    this.route.params.subscribe(params => {
+      this.selectedTopicId = params['topicId'];
+      this.createTopicForm();
+    });
   }
 
   createTopicForm() {
+    this.topicDetailsReady = false;
     this.topicForm = new FormGroup({
       name: new FormControl('', Validators.compose([Validators.required])),
       content: new FormControl('', Validators.compose([Validators.required]))
+    });
+    this.appSvc.getTopicById(this.selectedTopicId).subscribe(res => {
+      this.topicDetails = res;
+      this.topicForm.patchValue(res);
+      this.topicDetailsReady = true;
     });
   }
 
   submitTopic() {
     let topic: any = {};
-    topic.courseId = this.selectedTopic.courseId;
-    topic.topicId = this.selectedTopic.topicId;
-    topic.topicOrder = this.selectedTopic.order;
+    topic.courseId = this.topicDetails.courseId;
+    topic.topicId = this.topicDetails.topicId;
+    topic.topicOrder = this.topicDetails.order;
     topic.topicName = this.topicForm.controls.name.value;
     topic.topicContent = this.topicForm.controls.content.value;
     this.appSvc.updateTopic(topic).subscribe(savedTopic => {
-      this.editEvent.emit(savedTopic.topicId);
+      this.router.navigate(['view-course', this.topicDetails.courseId, { outlets: { topicDetails: ['topic', this.selectedTopicId] } }]);
     }, error => {
       console.error(error);
-      this.editEvent.emit(this.selectedTopicId);
+      this.router.navigate(['view-course', this.topicDetails.courseId, { outlets: { topicDetails: ['topic', this.selectedTopicId] } }]);
     });
   }
 
   cancelEdit() {
-    this.editEvent.emit(this.selectedTopicId);
+    this.router.navigate(['view-course', this.topicDetails.courseId, { outlets: { topicDetails: ['topic', this.selectedTopicId] } }]);
   }
 
 }

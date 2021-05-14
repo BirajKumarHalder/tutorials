@@ -1,21 +1,34 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppResolverService } from './app-resolver.service';
-import { AllCoursesComponent } from './view-course/all-courses/all-courses.component';
-import { CourseComponent } from './view-course/course/course.component';
+import { AllCoursesComponent } from './course/all-courses/all-courses.component';
+import { EditTopicComponent } from './course/edit-topic/edit-topic.component';
+import { TopicDetailsComponent } from './course/topic-details/topic-details.component';
+import { ViewCourseComponent } from './course/view-course/view-course.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'course/view',
+    redirectTo: 'course',
     pathMatch: 'full'
   }, {
-    path: 'course/view',
+    path: 'course',
     component: AllCoursesComponent
   }, {
-    path: 'course/view/:courseId',
-    component: CourseComponent,
-    resolve: { topicId: AppResolverService }
+    path: 'view-course/:courseId',
+    component: ViewCourseComponent,
+    resolve: { topicId: AppResolverService },
+    children: [
+      {
+        path: 'topic/:topicId',
+        component: TopicDetailsComponent,
+        outlet: 'topicDetails'
+      }, {
+        path: 'edit/:topicId',
+        component: EditTopicComponent,
+        outlet: 'topicDetails'
+      }
+    ]
   }
 ];
 

@@ -12,6 +12,7 @@ export class AppResolverService implements Resolve<any>{
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const courseId = route.params['courseId'];
+    //this api call will be done for user not for course
     return new Observable(subscriber => {
       this.appSvc.getCourseById(courseId).subscribe(res => {
         let selectedTopicId = -1;

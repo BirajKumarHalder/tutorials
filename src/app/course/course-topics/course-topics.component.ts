@@ -26,10 +26,12 @@ export class CourseTopicsComponent {
   deleteTopic(topic: TopicDetails) {
     const appSvcInstance = this.appSvc;
     const deleteEventInstance = this.deleteEvent;
-    let topicIdToEmit = -1;
-    if (this.selectedTopicId === topic.topicId && this.courseTopics?.length > 0) {
+    let topicIdToEmit = this.selectedTopicId;
+    if (topic.topicId === this.selectedTopicId) {
       if (topic.topicId !== this.courseTopics[0].topicId) {
         topicIdToEmit = this.courseTopics[0].topicId;
+      } else {
+        topicIdToEmit = -1;
       }
     }
     this.popupSvc.confirmThis("Are you sure to delete?", function () {

@@ -25,7 +25,7 @@ export class AllCoursesComponent implements OnInit {
   }
 
   viewCourse(course: CourseDetails) {
-    this.router.navigateByUrl('course/view/' + course.courseId);
+    this.router.navigateByUrl('view-course/' + course.courseId);
   }
 
 }

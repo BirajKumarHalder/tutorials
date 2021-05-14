@@ -35,15 +35,7 @@
             </app-course-topics>
         </div>
         <div class="col-md-12 col-lg-10">
-            <div *ngIf="!editTopic">
-                <app-course-topics-details [selectedTopicId]='selectedTopicId'
-                    (editTopic)="editTopicEventHandler($event)">
-                </app-course-topics-details>
-            </div>
-            <div *ngIf="editTopic">
-                <app-edit-topic [selectedTopicId]='selectedTopicId'
-                    (editEvent)="addEditDeleteTopicEventHandler($event)"></app-edit-topic>
-            </div>
+            <router-outlet name='topicDetails'></router-outlet>
             <app-course-topics-navigation [selectedTopicId]='selectedTopicId' [courseTopics]='courseTopics'
                 (selectedTopicEvent)='recieveSelectedTopicEvent($event)'>
             </app-course-topics-navigation>
